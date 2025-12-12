@@ -5,23 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GPA Calculator</title>
     <style>
-        /* General Page Styling *//* Dhanush */
+        /* Dhanush */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #bbbdbc; /* White background for full page look */
+            background-color: #bbbdbc; 
             margin: 0;
-            padding: 40px 20px; /* Top padding and side spacing */
+            padding: 40px 20px; 
             color: #333;
         }
 
-        /* Container to keep content centered and readable on large screens */
+        
         .content-wrapper {
-            max-width: 600px; /* Prevents inputs from getting too wide on desktop */
-            margin: 0 auto;   /* Centers the content */
+            max-width: 600px; 
+            margin: 0 auto;   
             width: 100%;
         }
 
-        /* Heading Style */
+       
         h1 {
             font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
             color: #245773;
@@ -40,7 +40,7 @@
             margin-bottom: 40px;
         }
 
-        /* The Dropdown Box Style */
+        
         .select-box {
             position: relative;
             width: 100%;
@@ -61,12 +61,12 @@
             padding: 15px;
             font-size: 16px;
             border: 1px solid #f2f0ef;
-            border-radius: 8px; /* Slightly rounder for full page */
+            border-radius: 8px; 
             background-color: #b19587;
             cursor: pointer;
             appearance: none; 
             -webkit-appearance: none;
-            box-sizing: border-box; /* Ensures padding doesn't break width */
+            box-sizing: border-box; 
         }
         
         select:focus, input:focus {
@@ -75,7 +75,7 @@
             background-color: #cabaa7;
         }
 
-        /* Custom Arrow */
+        
         .select-box::after {
              
             font-family: monospace;
@@ -87,7 +87,7 @@
             font-size: 1.2rem;
         }
 
-        /* Dynamic Inputs Area */
+       
         .course-row {
             display: flex;
             gap: 15px;
@@ -105,7 +105,7 @@
             box-sizing: border-box;
         }
 
-        /* Button Styling */
+        
         .calculate-btn {
             width: 100%;
             padding: 18px;
@@ -127,7 +127,7 @@
             background-color: #0056b3;
         }
 
-        /* Result Styling */
+        
         #result {
             text-align: center;
             font-size: 2rem;
@@ -137,7 +137,7 @@
             border-top: 1px solid #eee;
         }
 
-        /* Header for input columns */
+        
         .input-header {
             display: flex; 
             justify-content: space-between; 
@@ -234,7 +234,7 @@
                 const creditVal = parseFloat(credits[i].value);
                 const gradeVal = parseFloat(grades[i].value);
 
-                // Only calculate if the user has actually entered a credit value
+                
                 if (!isNaN(creditVal)) {
                     totalCredits += creditVal;
                     weightedSum += (creditVal * gradeVal);
@@ -243,7 +243,7 @@
 
             const resultDiv = document.getElementById('result');
             if (totalCredits === 0) {
-                resultDiv.innerText = ""; // Do nothing if empty
+                resultDiv.innerText = "";
             } else {
                 const gpa = (weightedSum / totalCredits).toFixed(2);
                 resultDiv.innerText = `GPA: ${gpa}`;
