@@ -1,0 +1,254 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GPA Calculator</title>
+    <style>
+        /* General Page Styling *//* Dhanush */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #bbbdbc; /* White background for full page look */
+            margin: 0;
+            padding: 40px 20px; /* Top padding and side spacing */
+            color: #333;
+        }
+
+        /* Container to keep content centered and readable on large screens */
+        .content-wrapper {
+            max-width: 600px; /* Prevents inputs from getting too wide on desktop */
+            margin: 0 auto;   /* Centers the content */
+            width: 100%;
+        }
+
+        /* Heading Style */
+        h1 {
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            color: #245773;
+            text-align: center;
+            font-weight: 300;
+            margin: 0;
+            font-size: 80px;
+        }
+        
+        h2 {
+            color: #733824;
+            text-align: center;
+            font-size: 20px;
+            font-weight: 300;
+            margin-top: 5px;
+            margin-bottom: 40px;
+        }
+
+        /* The Dropdown Box Style */
+        .select-box {
+            position: relative;
+            width: 100%;
+            margin-bottom: 30px;
+        }
+
+        label {
+            position: center;
+            display: block;
+            margin-bottom: 10px;
+            color: #555;
+            font-weight: 500;
+            font-size: 1.2rem;
+        }
+
+        select {
+            width: 100%;
+            padding: 15px;
+            font-size: 16px;
+            border: 1px solid #f2f0ef;
+            border-radius: 8px; /* Slightly rounder for full page */
+            background-color: #b19587;
+            cursor: pointer;
+            appearance: none; 
+            -webkit-appearance: none;
+            box-sizing: border-box; /* Ensures padding doesn't break width */
+        }
+        
+        select:focus, input:focus {
+            outline: none;
+            border-color: #be9197;
+            background-color: #cabaa7;
+        }
+
+        /* Custom Arrow */
+        .select-box::after {
+             
+            font-family: monospace;
+            position: absolute;
+            right: 20px;
+            top: 48px; 
+            pointer-events: none;
+            color: #666;
+            font-size: 1.2rem;
+        }
+
+        /* Dynamic Inputs Area */
+        .course-row {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        .course-row input, .course-row select {
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            width: 100%;
+            background-color: #f9f9f9;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        /* Button Styling */
+        .calculate-btn {
+            width: 100%;
+            padding: 18px;
+            background-color: #90d5ff;
+            color: rgb(22, 18, 18);
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            margin-top: 30px;
+            margin-bottom: 40px;
+            cursor: pointer;
+            display: none; 
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: background-color 0.2s;
+        }
+
+        .calculate-btn:hover {
+            background-color: #0056b3;
+        }
+
+        /* Result Styling */
+        #result {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: bold;
+            color: #28a745;
+            padding: 20px;
+            border-top: 1px solid #eee;
+        }
+
+        /* Header for input columns */
+        .input-header {
+            display: flex; 
+            justify-content: space-between; 
+            margin-bottom: 10px; 
+            font-weight: bold; 
+            color: #666;
+            padding: 0 5px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="content-wrapper">
+        <h1>GPA</h1>
+        <h2>Calculator</h2>
+
+        <div class="select-box">
+            <label>Select Total Subjects</label>
+            <select id="subjectSelector" onchange="generateInputs()">
+                <option value="0" disabled selected>Select...</option>
+                <option value="1">1 Subject</option>
+                <option value="2">2 Subjects</option>
+                <option value="3">3 Subjects</option>
+                <option value="4">4 Subjects</option>
+                <option value="5">5 Subjects</option>
+                <option value="6">6 Subjects</option>
+                <option value="7">7 Subjects</option>
+                <option value="8">8 Subjects</option>
+                <option value="9">9 Subjects</option>
+                <option value="10">10 Subjects</option>
+            </select>
+        </div>
+
+        <div id="inputContainer"></div>
+
+        <button id="calcBtn" class="calculate-btn" onclick="calculateGPA()">Calculate GPA</button>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        function generateInputs() {
+            const count = document.getElementById('subjectSelector').value;
+            const container = document.getElementById('inputContainer');
+            const btn = document.getElementById('calcBtn');
+            const resultDiv = document.getElementById('result');
+            
+            container.innerHTML = '';
+            resultDiv.innerText = '';
+            
+            if (count > 0) {
+                btn.style.display = 'block';
+                
+                // Header row
+                container.innerHTML = `
+                    <div class="input-header">
+                        <span style="width: 50%;">Credits</span>
+                        <span style="width: 50%;">Grade</span>
+                    </div>`;
+
+                for (let i = 0; i < count; i++) {
+                    const row = document.createElement('div');
+                    row.className = 'course-row';
+                    
+                    row.innerHTML = `
+                        <input type="number" placeholder="Credits" class="credit-input" min="1" max="10">
+                        <select class="grade-input">
+                            <option value="10">O (10)</option>
+                            <option value="9">A+ (9)</option>
+                            <option value="8">A (8)</option>
+                            <option value="7">B+ (7)</option>
+                            <option value="6">B (6)</option>
+                            <option value="5">C (5)</option>
+                            <option value="0">F (0)</option>
+                        </select>
+                    `;
+                    container.appendChild(row);
+                }
+            }
+        }
+
+        function calculateGPA() {
+            const credits = document.getElementsByClassName('credit-input');
+            const grades = document.getElementsByClassName('grade-input');
+            
+            let totalCredits = 0;
+            let weightedSum = 0;
+
+            for (let i = 0; i < credits.length; i++) {
+                const creditVal = parseFloat(credits[i].value);
+                const gradeVal = parseFloat(grades[i].value);
+
+                // Only calculate if the user has actually entered a credit value
+                if (!isNaN(creditVal)) {
+                    totalCredits += creditVal;
+                    weightedSum += (creditVal * gradeVal);
+                }
+            }
+
+            const resultDiv = document.getElementById('result');
+            if (totalCredits === 0) {
+                resultDiv.innerText = ""; // Do nothing if empty
+            } else {
+                const gpa = (weightedSum / totalCredits).toFixed(2);
+                resultDiv.innerText = `GPA: ${gpa}`;
+            }
+        }
+    </script>
+</body>
+</html>
