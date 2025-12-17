@@ -8,42 +8,47 @@
         /* Dhanush */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #bbbdbc; 
+            background: linear-gradient(135deg, #dbeafe, #e0e7ff);
             margin: 0;
-            padding: 40px 20px; 
+            padding: 40px 20px;
             color: #333;
         }
 
-        
         .content-wrapper {
-            max-width: 600px; 
-            margin: 0 auto;   
+            max-width: 600px;
+            margin: 0 auto;
             width: 100%;
+            background: #ffffff;
+            padding: 40px 30px;
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
         }
 
        
         h1 {
-            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-            color: #245773;
+            font-size: 48px;
+            font-weight: 600;
             text-align: center;
-            font-weight: 300;
-            margin: 0;
-            font-size: 80px;
+            color: #1f2937;
+            letter-spacing: 2px;
+            margin-bottom: 5px;
         }
         
         h2 {
-            color: #733824;
+            color: #555;
             text-align: center;
-            font-size: 20px;
-            font-weight: 300;
+            font-size: 18px;
+            font-weight: 400;
             margin-top: 5px;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
+            letter-spacing: 1px;
         }
         
          h5{
-            color :#245773;
+            color :#555;
             text-align: center;
-            margin-bottom: 0%;
+            margin-top: 20px;
+            font-weight: 400;
         }
 
 
@@ -58,37 +63,35 @@
 
         
         .select-box {
+            color: #86aa94;
             position: relative;
             width: 100%;
             margin-bottom: 30px;
         }
 
         label {
-            position: center;
-            display: block;
             margin-bottom: 10px;
-            color: #555;
-            font-weight: 500;
-            font-size: 1.2rem;
+            color: #333;
+            font-weight: 600;
+            font-size: 1rem;
         }
 
         select {
             width: 100%;
             padding: 15px;
             font-size: 16px;
-            border: 1px solid #f2f0ef;
-            border-radius: 8px; 
-            background-color: #b19587;
+            border-radius: 12px;
+            border: 1px solid #c7d2fe;
+            background-color: #f8fafc;   /* light neutral */
+            color: #1f2937;
             cursor: pointer;
-            appearance: none; 
-            -webkit-appearance: none;
-            box-sizing: border-box; 
         }
         
         select:focus, input:focus {
             outline: none;
-            border-color: #be9197;
-            background-color: #cabaa7;
+            border-color: #a1a2ee;
+            box-shadow: 0 0 0 3px rgba(99,102,241,0.25);
+            background-color: #ffffff;
         }
 
         
@@ -99,7 +102,7 @@
             right: 20px;
             top: 48px; 
             pointer-events: none;
-            color: #666;
+            color: #e2e0e0;
             font-size: 1.2rem;
         }
 
@@ -112,45 +115,48 @@
         }
 
         .course-row input, .course-row select {
-            padding: 15px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
+            padding: 14px;
+            border: 1px solid #d1d5db;
+            border-radius: 10px;
             width: 100%;
-            background-color: #f9f9f9;
+            background-color: #f9fafb;
             font-size: 16px;
-            box-sizing: border-box;
+            /*box-sizing: border-box;*/
         }
 
         
         .calculate-btn {
             width: 100%;
             padding: 18px;
-            background-color: #90d5ff;
-            color: rgb(22, 18, 18);
+            background:linear-gradient(135deg,#3b82f6,#2563eb);
+            color: #fff;
             border: none;
-            border-radius: 8px;
+            border-radius: 12px;
             font-size: 18px;
             font-weight: 600;
-            margin-top: 30px;
-            margin-bottom: 40px;
+            margin-top: 25px;
+            margin-bottom: 30px;
             cursor: pointer;
             display: none; 
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            transition: background-color 0.2s;
+            box-shadow: 0 10px 20px rgba(59,130,246,0.4);
+            transition: transform  0.2s ease,box-shadow 0.2 ease;
         }
 
         .calculate-btn:hover {
-            background-color: #0056b3;
+            transform: translateY(-2px);
+            box-shadow: 0 15px 25px rgba(59,130,246,0.6);
         }
 
         
         #result {
             text-align: center;
-            font-size: 2rem;
+            font-size: 2.4rem;
             font-weight: bold;
-            color: #28a745;
-            padding: 20px;
-            border-top: 1px solid #eee;
+            color: #16a34a;
+            padding: 25px;
+            margin-top: 20px;
+            background: #fefffd;
+            border-radius: 12px;
         }
 
         
@@ -167,6 +173,19 @@
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
+
+        @media (max-width: 600px) {
+            .content-wrapper {
+                padding: 25px 18px;
+                border-radius: 14px;
+            }
+        }
+        @media (max-width: 600px) {
+            body {
+            padding: 20px 12px;
+        }
+    }
+
     </style>
 </head>
 <body>
@@ -233,6 +252,7 @@
                             <option value="7">B+ (7)</option>
                             <option value="6">B (6)</option>
                             <option value="5">C (5)</option>
+                            <option value="4">P (4)</option>
                             <option value="0">F (0)</option>
                         </select>
                     `;
@@ -264,8 +284,9 @@
                 resultDiv.innerText = "";
             } else {
                 const gpa = (weightedSum / totalCredits).toFixed(2);
-                resultDiv.innerText = `GPA: ${gpa}`;
+                resultDiv.innerText=`Your GPA: ${gpa}`;
             }
+            
         }
     </script>
 </body>
